@@ -1,2 +1,4 @@
 #!/bin/bash
 
+# delete all archives (tar.gz) in '/var/backups/my-logs-backup-folder' that are exactly one day old
+find /var/backups/my-logs-backup-folder -type f -name "*.tar.gz" -mtime 1 -exec rm {} \;
