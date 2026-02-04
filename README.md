@@ -77,4 +77,5 @@ The tool maintains a continuous audit trail by creating or updating a log file n
 ```bash
 cat /path/to/your/archive-logs-history.log
 ```
-<img width="1797" height="349" alt="Screenshot 2026-02-04 083641" src="https://github.com/user-attachments/assets/d3edcecf-c9a1-4a6d-9376-5180d6f0276f" />
+
+<img width="1807" height="376" alt="Screenshot 2026-02-04 084649" src="https://github.com/user-attachments/assets/15bc9a25-9744-4db1-8f93-ecdc5e34a547" />
