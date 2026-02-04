@@ -1,6 +1,6 @@
 # Archive CleanUp Tool 🚮
 
-A lightweight, efficient Bash CLI utility designed to automate the cleanup of old backup archives. This tool scans a specified directory, identifies compressed `.tar.gz` files older than 3 days, deletes them to save disk space, and maintains a detailed log history of all actions.
+A lightweight, efficient Bash CLI utility designed to automate the cleanup of old backup archives. This tool scans a specified directory, identifies compressed `.tar.gz` files older than 30 days, deletes them to save disk space, and maintains a detailed log history of all actions.
 
 ## ✨ Features
 
