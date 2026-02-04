@@ -1,4 +1,50 @@
 #!/bin/bash
 
-# delete all archives (tar.gz) in '/var/backups/my-logs-backup-folder' that are exactly one day old
-find /var/backups/my-logs-backup-folder -type f -name "*.tar.gz" -mtime 1 -exec rm {} \;
+# path for systemmd-timers and cron jobs
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# cli tool to compress and backup data folders
+delete_archives() {
+    # log folder argument; removing trailing slash (if there) for tar command's dirname and basename functionality below
+    local user_archive_folder="${1%/}"
+
+    # checking if an argument has been passed in the terminal; if no arg passed fail otherwise continue with script
+    if [[ -z "$user_archive_folder" ]]; then
+        echo -e "\n🚨 \e[31mKindly provide an archive folder!" 
+        return 1
+    fi
+
+    # checking if directory given exists
+    if [[ ! -d "$user_archive_folder" ]]; then
+        echo -e "\n🚨 \e[31mThe directory you passed doesn't exist. Kindly check your path!"
+        return 1
+    fi
+
+    # already existing in the backup folder displaying history of all backed up archives
+    archive_log_file="$user_archive_folder/archive-logs-history.log"
+
+    # deleting logs
+    echo -e "🚮 Deleting old archives, please wait..."
+    # fetching timestamp
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    # delete all archives (tar.gz) in user_archive_folder older than 3 days
+    find "$user_archive_folder" -type f -name "*.tar.gz" -mtime +3 -exec rm {} \;
+    # saving current tar exit code after compression
+    find_exit_code=$?
+
+    # error checking
+    # if deleted successfully...
+    if [[ $find_exit_code -eq 0 ]]; then
+        # creating if doesn't exist, archive log file in /var/backups/my-logs-backup-folder
+        touch "$archive_log_file"
+        echo "✅ Sucess: Old archives deleted"
+        # updating archive log file of the new compression process
+        echo "🚮 Cleanup Sucess: [$timestamp]: Backups older than 3 days deleted!" >> "$archive_log_file"
+    else
+        echo "❌ Cleanup failed with exit code $find_exit_code"
+        return 1
+    fi
+}
+
+# running function with folder passed arg in terminal
+delete_archives "$1"
