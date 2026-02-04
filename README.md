@@ -56,6 +56,9 @@ If you have backups stored in `/var/backups/my-logs-backup-folder`, simply run:
 sudo cleanup-tool /var/backups/my-logs-backup-folder
 ```
 
+<img width="1820" height="187" alt="Screenshot 2026-02-04 083318" src="https://github.com/user-attachments/assets/23fe2667-b706-4b80-a123-8b5bace45024" />
+
+
 ## 🤖 Automation Ready
 
 This utility is designed for headless execution and is perfect for scheduled system maintenance. Since it is installed in `/usr/local/bin`, it can be easily integrated into your preferred scheduling engine; **systemmd timers** or **cron jobs**.
@@ -71,4 +74,7 @@ The tool maintains a continuous audit trail by creating or updating a log file n
 
 ### Sample Log Entry:
 
-add screenshot here
+```bash
+cat /path/to/your/archive-logs-history.log
+```
+<img width="1797" height="349" alt="Screenshot 2026-02-04 083641" src="https://github.com/user-attachments/assets/d3edcecf-c9a1-4a6d-9376-5180d6f0276f" />
