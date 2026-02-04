@@ -26,14 +26,14 @@ delete_archives() {
     # placing files to delete in a variable
     local tarfiles_to_delete=$(find "$user_archive_folder" -type f -name "*.tar.gz" -mtime +30)
 
-    # if there are files older than 3 days delete then else echo no files found older than 3 days
+    # if there are files older than 30 days delete else echo no files found older than 30 days
     if [[ -n "$tarfiles_to_delete" ]]; then
         echo -e "🚮 Deleting old archives, please wait..."
         # creating if doesn't exist, archive log file in /var/backups/my-logs-backup-folder
         touch "$archive_log_file"
         # updating archive log file of the new compression process
         echo -e "Here is the list of tar files being deleted:\n$tarfiles_to_delete" >> "$archive_log_file"
-        # delete all archives (tar.gz) in user_archive_folder older than 3 days
+        # delete all archives (tar.gz) in user_archive_folder older than 30 days
         find "$user_archive_folder" -type f -name "*.tar.gz" -mtime +30 -print0 | xargs -0 rm
         local delete_exit_code=$?
         # error checking, if deletion failed
@@ -44,7 +44,7 @@ delete_archives() {
         echo "✅ Sucess: Old archives deleted"
         echo "🚮 Cleanup Sucess: [$(date +%Y%m%d_%H%M%S)]: Backups older than 3 days deleted!" >> "$archive_log_file"
     else
-        echo "No files older than 3 days found."
+        echo "No files older than 30 days found."
     fi
 }
 
