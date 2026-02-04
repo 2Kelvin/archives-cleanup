@@ -42,7 +42,7 @@ delete_archives() {
             return 1
         fi
         echo "✅ Sucess: Old archives deleted"
-        echo "🚮 Cleanup Sucess: [$(date +%Y%m%d_%H%M%S)]: Backups older than 3 days deleted!" >> "$archive_log_file"
+        echo "🚮 Cleanup Sucess: [$(date +%Y%m%d_%H%M%S)]: Backups older than 30 days deleted!" >> "$archive_log_file"
     else
         echo "No files older than 30 days found."
     fi
